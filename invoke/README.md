@@ -2,8 +2,6 @@
 
 ## Usage
 
-### Invoke
-
 An example workflow to invoke a bearer function
 
 ```
@@ -16,7 +14,7 @@ action "invoke" {
   uses = "bearer/github-actions/invoke@master"
   secrets = ["BEARER_API_KEY"]
   env = {
-    BUID = "INTEGRATION_BUID",
+    UUID = "INTEGRATION_UUID",
     FUNCTION_NAME = "INTEGRATION_FUNCTION_NAME"
   }
 }
@@ -29,7 +27,7 @@ action "invoke" {
 
 ### Environment variables
 
-- `BUID` - **Required**. To specify what integration you target
+- `UUID` - **Required**. To specify what integration you target
 - `FUNCTION_NAME` - **Required**. To specify what function you want to invoke
 - `DATA` - **Optional**. Invoke function with data, JSON string ex `"DATA" : '{"foo": "bar"}'`
 
