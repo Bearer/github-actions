@@ -16,8 +16,8 @@ action "invoke" {
   uses = "bearer/github-actions/invoke@master"
   secrets = ["BEARER_API_KEY"]
   env = {
-    "BUID": "INTEGRATION_BUID",
-    "FUNCTION_NAME": "INTEGRATION_FUNCTION_NAME"
+    BUID = "INTEGRATION_BUID",
+    FUNCTION_NAME = "INTEGRATION_FUNCTION_NAME"
   }
 }
 
