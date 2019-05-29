@@ -30,7 +30,7 @@ action "invoke" {
 - `UUID` - **Required**. To specify what integration you target
 - `FUNCTION_NAME` - **Required**. To specify what function you want to invoke
 - `DATA` - **Optional**. Invoke function with data, JSON string ex `"DATA" : '{"foo": "bar"}'`
-- `AUTH_ID` - **Optional**. Authenticate you function invoke with a specific auth identifier
+- `AUTH_ID` - **Optional**. Authenticate your function invoke with a specific auth identifier
 
 ## License
 
