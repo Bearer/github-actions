@@ -11,8 +11,9 @@ PAYLOAD=${DATA-"{}"}
 
 response=$(curl -X POST -s \
   -d "$PAYLOAD" \
+  -H "Content-Type: application/json" \
   -H "Authorization: $BEARER_API_KEY" \
-  "$BEARER_HOST/api/v5/functions/backend/${UUID}/$FUNCTION_NAME")
+  "$BEARER_HOST/api/v5/functions/backend/${UUID}/$FUNCTION_NAME?authId=$AUTH_ID")
 
 error=$(echo $response | jq .error)
 data=$(echo $response | jq .data)
