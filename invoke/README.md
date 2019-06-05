@@ -32,6 +32,7 @@ action "invoke" {
 - `SETUP_ID` - **Optional**. Retrieves required credentials (needed for basic and api key authentication types)
 - `AUTH_ID` - **Optional**. Authenticate your function invoke with a specific auth identifier
 - `DATA` - **Optional**. Invoke function with data, JSON string ex `"DATA" : '{"foo": "bar"}'`
+- `NOTIFY_URL` - **Optional**. Slack webhook url where
 
 ## License
 
