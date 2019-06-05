@@ -29,8 +29,9 @@ action "invoke" {
 
 - `UUID` - **Required**. To specify what integration you target
 - `FUNCTION_NAME` - **Required**. To specify what function you want to invoke
-- `DATA` - **Optional**. Invoke function with data, JSON string ex `"DATA" : '{"foo": "bar"}'`
+- `SETUP_ID` - **Optional**. Retrieves required credentials (needed for basic and api key authentication types)
 - `AUTH_ID` - **Optional**. Authenticate your function invoke with a specific auth identifier
+- `DATA` - **Optional**. Invoke function with data, JSON string ex `"DATA" : '{"foo": "bar"}'`
 
 ## License
 

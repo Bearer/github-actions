@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -n "$OUTPUT" ]; then
+  echo $OUTPUT
+else
+  echo "curl: $*"
+fi
