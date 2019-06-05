@@ -125,3 +125,21 @@ function setup() {
   echo "${lines[2]}" | grep "https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?authId=auth-id&setupId=setup-id"
 }
 
+@test " OPTION - NOTIFY_URL" {
+  export BEARER_API_KEY="a-key"
+  export FUNCTION_NAME="function-name"
+  export UUID="function-name"
+  export LOG_LEVEL="DEBUG"
+  export AUTH_ID="auth-id"
+  export SETUP_ID="setup-id"
+  export NOTIFY_URL="notify"
+  export GITHUB_REPOSITORY="repo"
+  export GITHUB_WORKFLOW="workflow"
+
+  run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
+
+  PATTERN='--data {"text":"Error during function invoke", "blocks":\[{ "type": "section", "fields": \[{ "type": "mrkdwn", "text": "\*Workflow\* workflow" }, { "type": "mrkdwn", "text": "\*URL\* https://github.com/repo/actions" }\] }\] } notify'
+  echo "$output"
+  echo "${output}" | grep -e $PATTERN
+}
+
