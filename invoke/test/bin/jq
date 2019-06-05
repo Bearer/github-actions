@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -n "$JQ_OUTPUT" ]; then
+  echo $JQ_OUTPUT
+else
+  echo "jq: $*"
+fi
