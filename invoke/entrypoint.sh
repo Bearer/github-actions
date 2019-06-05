@@ -8,7 +8,7 @@ log() {
 
 notify() {
   if [ -n "$NOTIFY_URL" ]; then
-    data="{\"text\":\"Error during function invoke: ${error}\", \"blocks\":[{ \"type\": \"section\", \"fields\": [{ \"type\": \"mrkdwn\", \"text\": \"*Workflow* ${GITHUB_WORKFLOW}\" }, { \"type\": \"mrkdwn\", \"text\": \"*URL* https://github.com/${GITHUB_REPOSITORY}/actions\" }] }] }"
+    data="{\"text\":\"Error during function invoke\", \"blocks\":[{ \"type\": \"section\", \"fields\": [{ \"type\": \"mrkdwn\", \"text\": \"*Workflow* ${GITHUB_WORKFLOW}\" }, { \"type\": \"mrkdwn\", \"text\": \"*URL* https://github.com/${GITHUB_REPOSITORY}/actions\" }] }] }"
     curl -X POST -H 'Content-type: application/json' --data $data $NOTIFY_URL
   fi
 }

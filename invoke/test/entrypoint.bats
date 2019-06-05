@@ -137,7 +137,7 @@ function setup() {
   export GITHUB_WORKFLOW="workflow"
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  PATTERN='--data {"text":"Error during function invoke: jq: .error", "blocks":\[{ "type": "section", "fields": \[{ "type": "mrkdwn", "text": "\*Workflow\* workflow" }, { "type": "mrkdwn", "text": "\*URL\* https://github.com/repo/actions" }\] }\] } notify'
+  PATTERN='--data {"text":"Error during function invoke", "blocks":\[{ "type": "section", "fields": \[{ "type": "mrkdwn", "text": "\*Workflow\* workflow" }, { "type": "mrkdwn", "text": "\*URL\* https://github.com/repo/actions" }\] }\] } notify'
   echo "$output"
   echo "${output}" | grep -e $PATTERN
 }
