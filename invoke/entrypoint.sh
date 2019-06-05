@@ -6,6 +6,13 @@ log() {
   fi
 }
 
+notify() {
+  if [ -n "$NOTIFY_URL" ]; then
+    data="{\"text\":\"Error during function invoke: ${error}\", \"blocks\":[{ \"type\": \"section\", \"fields\": [{ \"type\": \"mrkdwn\", \"text\": \"*Workflow* ${GITHUB_WORKFLOW}\" }, { \"type\": \"mrkdwn\", \"text\": \"*URL* https://github.com/${GITHUB_REPOSITORY}/actions\" }] }] }"
+    curl -X POST -H 'Content-type: application/json' --data $data $NOTIFY_URL
+  fi
+}
+
 set -e
 
 BEARER_HOST=${HOST-"https://int.bearer.sh"}
@@ -53,5 +60,6 @@ fi
 if [[ "$error" != "null" ]]; then
   echo "An error occured"
   echo $error
+  notify $error
   exit 1
 fi
