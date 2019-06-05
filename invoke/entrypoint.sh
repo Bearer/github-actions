@@ -8,7 +8,7 @@ log() {
 
 set -e
 
-BEARER_HOST=${HOST-"http://int.bearer.sh"}
+BEARER_HOST=${HOST-"https://int.bearer.sh"}
 API_VERSION=${VERSION-"v5"}
 PAYLOAD=${DATA-"{}"}
 

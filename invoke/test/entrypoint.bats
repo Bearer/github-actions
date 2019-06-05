@@ -45,7 +45,7 @@ function setup() {
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[2]}" | grep "curl: -X POST -s -d {} -H Content-Type: application/json -H Authorization: a-key http://int.bearer.sh/api/v5/functions/backend/function-name/function-name?"
+  echo "${lines[2]}" | grep "curl: -X POST -s -d {} -H Content-Type: application/json -H Authorization: a-key https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?"
 }
 
 # Options
@@ -55,11 +55,11 @@ function setup() {
   export FUNCTION_NAME="function-name"
   export UUID="function-name"
   export LOG_LEVEL="DEBUG"
-  export HOST="http://int.bearer.sh/suffix"
+  export HOST="https://int.bearer.sh/suffix"
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[2]}" | grep "curl: -X POST -s -d {} -H Content-Type: application/json -H Authorization: a-key http://int.bearer.sh/suffix/api/v5/functions/backend/function-name/function-name?"
+  echo "${lines[2]}" | grep "curl: -X POST -s -d {} -H Content-Type: application/json -H Authorization: a-key https://int.bearer.sh/suffix/api/v5/functions/backend/function-name/function-name?"
 }
 
 @test "OPTION - API_VERSION" {
@@ -72,7 +72,7 @@ function setup() {
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
   echo "$output"
-  echo "${lines[2]}" | grep "http://int.bearer.sh/api/spongebob/functions/backend/function-name/function-name?"
+  echo "${lines[2]}" | grep "https://int.bearer.sh/api/spongebob/functions/backend/function-name/function-name?"
 }
 
 @test "OPTION - DATA" {
@@ -97,7 +97,7 @@ function setup() {
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[2]}" | grep " http://int.bearer.sh/api/v5/functions/backend/function-name/function-name?authId=auth-id"
+  echo "${lines[2]}" | grep " https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?authId=auth-id"
 }
 
 @test "OPTION - SETUP_ID" {
@@ -109,7 +109,7 @@ function setup() {
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[2]}" | grep "http://int.bearer.sh/api/v5/functions/backend/function-name/function-name?&setupId=setup-id"
+  echo "${lines[2]}" | grep "https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?&setupId=setup-id"
 }
 
 @test "OPTION - SETUP_ID & AUTH_ID" {
@@ -122,6 +122,6 @@ function setup() {
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
   echo "$output"
-  echo "${lines[2]}" | grep "http://int.bearer.sh/api/v5/functions/backend/function-name/function-name?authId=auth-id&setupId=setup-id"
+  echo "${lines[2]}" | grep "https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?authId=auth-id&setupId=setup-id"
 }
 
