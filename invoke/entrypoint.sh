@@ -16,11 +16,15 @@ notify() {
 
 notify_bearer() {
   if [ -n "$NOTIFY_BEARER_URL" ]; then
+
+      echo "Sending notification to bearer"
+      echo "payload: $1"
+
       curl -X POST \
            -H "Content-Type: application/json" \
            -H "Authorization: $BEARER_API_KEY" \
            --data "$1" \
-      $NOTIFY_BEARER_URL
+      "$NOTIFY_BEARER_URL"
   fi
 }
 set -e
@@ -28,6 +32,7 @@ set -e
 BEARER_HOST=${HOST-"https://int.bearer.sh"}
 API_VERSION=${VERSION-"v5"}
 PAYLOAD=${DATA-"{}"}
+STAGE=${STAGE-"test"}
 
 : ${BEARER_API_KEY:?"Need to set BEARER_API_KEY non-empty"}
 : ${FUNCTION_NAME:?"Need to set FUNCTION_NAME non-empty"}
@@ -67,7 +72,9 @@ if [[ "${LOG_LEVEL:-none}" == "DEBUG" ]]; then
   echo $data
 fi
 
-notify_bearer "$response"
+payload=$(echo "$response" | base64 -w0)
+
+notify_bearer "{\"stage\":\"$STAGE\",\"payload\":\"$payload\",\"buid\":\"$UUID\"}"
 
 if [[ "$error" != "null" ]]; then
   echo "An error occured"

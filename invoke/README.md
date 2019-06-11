@@ -34,6 +34,7 @@ action "invoke" {
 - `DATA` - **Optional**. Invoke function with data, JSON string ex `"DATA" : '{"foo": "bar"}'`
 - `NOTIFY_URL` - **Optional**. Slack webhook url where
 - `NOTIFY_BEARER_URL` - **Optional**. Bearer integration url notification
+- `STAGE` - **Optional**. stage
 
 ## License
 
