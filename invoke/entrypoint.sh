@@ -13,6 +13,16 @@ notify() {
   fi
 }
 
+
+notify_bearer() {
+  if [ -n "$NOTIFY_BEARER_URL" ]; then
+      curl -X POST \
+           -H "Content-Type: application/json" \
+           -H "Authorization: $BEARER_API_KEY" \
+           --data "$1" \
+      $NOTIFY_BEARER_URL
+  fi
+}
 set -e
 
 BEARER_HOST=${HOST-"https://int.bearer.sh"}
@@ -56,6 +66,8 @@ log "data: " $data
 if [[ "${LOG_LEVEL:-none}" == "DEBUG" ]]; then
   echo $data
 fi
+
+notify_bearer "$response"
 
 if [[ "$error" != "null" ]]; then
   echo "An error occured"
