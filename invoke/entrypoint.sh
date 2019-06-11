@@ -72,7 +72,7 @@ if [[ "${LOG_LEVEL:-none}" == "DEBUG" ]]; then
   echo $data
 fi
 
-payload=$(echo "$response" | base64 -w0)
+payload=$(echo "$response" | base64 | xargs echo -n | tr -d ' ')
 
 notify_bearer "{\"stage\":\"$STAGE\",\"payload\":\"$payload\",\"buid\":\"$UUID\"}"
 
