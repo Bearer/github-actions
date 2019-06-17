@@ -1,5 +1,7 @@
 #!/bin/ash
 
+set -e
+
 log() {
   if [[ "${LOG_LEVEL:-none}" == "DEBUG" ]]; then
     echo $*
@@ -27,7 +29,6 @@ notify_bearer() {
       "$NOTIFY_BEARER_URL"
   fi
 }
-set -e
 
 BEARER_HOST=${HOST-"https://int.bearer.sh"}
 API_VERSION=${VERSION-"v5"}
@@ -52,13 +53,28 @@ url="$BEARER_HOST/api/${API_VERSION}/functions/backend/${UUID}/${FUNCTION_NAME}?
 log "payload: " $PAYLOAD
 log "url: " $url
 
-response=$(
+temp_file=$(mktemp)
+
+response_code=$(
   curl -X POST -s \
     -d $PAYLOAD \
     -H "Content-Type: application/json" \
     -H "Authorization: $BEARER_API_KEY" \
+    -o $temp_file \
+    -w "%{http_code}" \
     $url
 )
+
+
+response=$(cat $temp_file)
+
+if [[ "$response_code" != "200" ]]; then
+  echo "An error occured"
+  log "response: " $response
+  echo $response_code
+  notify $error
+  exit 1
+fi
 
 log "response: " $response
 
