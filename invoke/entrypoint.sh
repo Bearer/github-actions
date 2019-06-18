@@ -73,6 +73,9 @@ if [[ "$response_code" != "200" ]]; then
   log "response: " $response
   echo $response_code
   notify $error
+
+  payload=$(echo "{\"error\":\"Backend function request failed with $response_code\"}" | base64 | xargs echo -n | tr -d ' ')
+  notify_bearer "{\"stage\":\"$STAGE\",\"payload\":\"$payload\",\"buid\":\"$UUID\"}"
   exit 1
 fi
 

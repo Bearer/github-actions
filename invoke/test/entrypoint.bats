@@ -48,6 +48,23 @@ function setup() {
   echo "${lines[1]}" | grep "url: https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?"
 }
 
+@test "failing request exits with 1" {
+  export BEARER_API_KEY="a-key"
+  export FUNCTION_NAME="function-name"
+  export UUID="function-name"
+  export LOG_LEVEL="DEBUG"
+  export AUTH_ID="auth-id"
+  export SETUP_ID="setup-id"
+  export NOTIFY_URL="notify"
+  export GITHUB_REPOSITORY="repo"
+  export GITHUB_WORKFLOW="workflow"
+  export OUTPUT='404'
+
+  run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
+
+  [ "$status" -eq 1 ]
+}
+
 # Options
 
 @test "OPTION - HOST" {
