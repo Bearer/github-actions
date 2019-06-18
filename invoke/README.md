@@ -36,6 +36,18 @@ action "invoke" {
 - `NOTIFY_BEARER_URL` - **Optional**. Bearer integration url notification
 - `STAGE` - **Optional**. stage
 
+## Testing
+
+using github actions helper
+``` bash
+act push
+```
+
+if you have bats installed
+``` bash
+GITHUB_WORKSPACE=".." BATS_TEST_DIRNAME=test bats -p test/entrypoint.bats
+```
+
 ## License
 
 The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](LICENSE).

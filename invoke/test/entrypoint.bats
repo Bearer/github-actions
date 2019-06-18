@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-PATH="$PATH:$BATS_TEST_DIRNAME/bin"
+PATH="$BATS_TEST_DIRNAME/bin:$PATH"
 
 function setup() {
   # Ensure GITHUB_WORKSPACE is set
@@ -9,6 +9,7 @@ function setup() {
 }
 
 @test "raises if BEARER_API_KEY is missing" {
+  echo $GITHUB_WORKSPACE/invoke/entrypoint.sh
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
   echo $output | grep "Need to set BEARER_API_KEY non-empty"
@@ -31,7 +32,6 @@ function setup() {
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo $status
   echo $output | grep "Need to set UUID non-empty"
   [ "$status" -ne 0 ]
 }
@@ -41,11 +41,11 @@ function setup() {
   export FUNCTION_NAME="function-name"
   export UUID="function-name"
   export LOG_LEVEL="DEBUG"
-  # export OUTPUT='{ "data": "ok"}'
+  export OUTPUT='200'
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[2]}" | grep "curl: -X POST -s -d {} -H Content-Type: application/json -H Authorization: a-key https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?"
+  echo "${lines[1]}" | grep "url: https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?"
 }
 
 # Options
@@ -59,7 +59,7 @@ function setup() {
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[2]}" | grep "curl: -X POST -s -d {} -H Content-Type: application/json -H Authorization: a-key https://int.bearer.sh/suffix/api/v5/functions/backend/function-name/function-name?"
+  echo "${lines[1]}" | grep "url: https://int.bearer.sh/suffix/api/v5/functions/backend/function-name/function-name?"
 }
 
 @test "OPTION - API_VERSION" {
@@ -141,4 +141,3 @@ function setup() {
   echo "$output"
   echo "${output}" | grep -e $PATTERN
 }
-

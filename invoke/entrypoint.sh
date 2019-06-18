@@ -65,7 +65,7 @@ response_code=$(
     $url
 )
 
-
+log "response_code: " $response_code
 response=$(cat $temp_file)
 
 if [[ "$response_code" != "200" ]]; then
