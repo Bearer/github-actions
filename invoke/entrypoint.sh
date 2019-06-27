@@ -31,7 +31,7 @@ notify_bearer() {
 }
 
 BEARER_HOST=${HOST-"https://int.bearer.sh"}
-API_VERSION=${VERSION-"v5"}
+API_VERSION=${VERSION-"v4"}
 PAYLOAD=${DATA-"{}"}
 STAGE=${STAGE-"test"}
 
