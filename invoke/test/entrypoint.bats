@@ -45,7 +45,7 @@ function setup() {
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[1]}" | grep "url: https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?"
+  echo "${lines[1]}" | grep "url: https://int.bearer.sh/api/v4/functions/backend/function-name/function-name?"
 }
 
 @test "failing request exits with 1" {
@@ -76,7 +76,7 @@ function setup() {
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[1]}" | grep "url: https://int.bearer.sh/suffix/api/v5/functions/backend/function-name/function-name?"
+  echo "${lines[1]}" | grep "url: https://int.bearer.sh/suffix/api/v4/functions/backend/function-name/function-name?"
 }
 
 @test "OPTION - API_VERSION" {
@@ -114,7 +114,7 @@ function setup() {
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[2]}" | grep " https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?authId=auth-id"
+  echo "${lines[2]}" | grep " https://int.bearer.sh/api/v4/functions/backend/function-name/function-name?authId=auth-id"
 }
 
 @test "OPTION - SETUP_ID" {
@@ -126,7 +126,7 @@ function setup() {
 
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
-  echo "${lines[2]}" | grep "https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?&setupId=setup-id"
+  echo "${lines[2]}" | grep "https://int.bearer.sh/api/v4/functions/backend/function-name/function-name?&setupId=setup-id"
 }
 
 @test "OPTION - SETUP_ID & AUTH_ID" {
@@ -139,7 +139,7 @@ function setup() {
   run /bin/bash $GITHUB_WORKSPACE/invoke/entrypoint.sh
 
   echo "$output"
-  echo "${lines[2]}" | grep "https://int.bearer.sh/api/v5/functions/backend/function-name/function-name?authId=auth-id&setupId=setup-id"
+  echo "${lines[2]}" | grep "https://int.bearer.sh/api/v4/functions/backend/function-name/function-name?authId=auth-id&setupId=setup-id"
 }
 
 @test " OPTION - NOTIFY_URL" {
